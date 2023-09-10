@@ -1,0 +1,7 @@
+response:
+  start: "Hi! In order to start use this aweesome news bot please provide your lively news sources."
+  unknown_command: "I don't know such a command :("
+  source_added: "You have successfully subscribe to %s!"
+error:
+  default: "An unknown error has occurred."
+  invalid_url: "This is an invalid url."
