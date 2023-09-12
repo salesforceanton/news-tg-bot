@@ -1,0 +1,39 @@
+version: '3.7'
+
+services:
+  app:
+    image: news-tg-bot
+    container_name: news-tg-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - 80:80
+    env_file:
+      - .env
+    networks:
+      - application
+
+  postgres:
+    image: postgres:latest
+    container_name: pg
+    ports:
+      - ${NEWSBOTDB_PORT}:${NEWSBOTDB_PORT}
+    expose:
+      - ${NEWSBOTDB_PORT}
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_DB=${NEWSBOTDB_NAME}
+      - POSTGRES_PASSWORD=${NEWSBOTDB_PASSWORD}
+      - POSTGRES_USER=${NEWSBOTDB_USERNAME}
+    volumes:
+      - ./schema:/docker-entrypoint-initdb.d
+    networks:
+      - application
+
+networks:
+  application:
+    driver: bridge
