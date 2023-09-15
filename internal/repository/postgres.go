@@ -13,6 +13,7 @@ const (
 	ARTICLES_TABLE      = "articles"
 	SOURCES_TABLE       = "sources"
 	SUBSCRIPTIONS_TABLE = "subscriptions"
+	USERS_TABLE         = "users"
 )
 
 func NewPostgresDB(cfg *config.DatabaseConfig) (*sqlx.DB, error) {

@@ -20,11 +20,11 @@ type Source struct {
 
 type Article struct {
 	Id          int64  `db:"id"`
-	SourceId    int64  `db:"name"`
-	Title       string `db:"id"`
-	Link        string `db:"name"`
-	Summary     string `db:"feed_url"`
-	PublishedAt string `db:"id"`
-	CreatedAt   string `db:"name"`
-	PostedAt    string `db:"feed_url"`
+	SourceId    int64  `db:"source_id"`
+	Title       string `db:"title"`
+	Link        string `db:"link"`
+	Summary     string `db:"summary"`
+	PublishedAt string `db:"published_at"`
+	CreatedAt   string `db:"created_at"`
+	Posted      bool   `db:"posted"`
 }

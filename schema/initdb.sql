@@ -16,7 +16,7 @@ CREATE TABLE sources
 (
     id           serial       not null unique,
     name         varchar(255) not null,
-    feed_url     varchar(255) not null
+    feed_url     varchar(255) not null unique
 );
 
 CREATE TABLE articles
@@ -28,5 +28,5 @@ CREATE TABLE articles
     summary      text         not null,
     published_at timestamp    not null,
     created_at   timestamp    not null,
-    posted_at    timestamp    not null
+    posted       boolean      default false 
 );
