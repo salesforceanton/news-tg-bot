@@ -1,5 +1,7 @@
 package model
 
+import "time"
+
 type User struct {
 	Id     int64  `db:"id"`
 	Alias  string `db:"user_alias"`
@@ -27,4 +29,13 @@ type Article struct {
 	PublishedAt string `db:"published_at"`
 	CreatedAt   string `db:"created_at"`
 	Posted      bool   `db:"posted"`
+}
+
+type FeedItem struct {
+	Title      string
+	Categories []string
+	Link       string
+	Date       time.Time
+	Summary    string
+	SourceName string
 }
