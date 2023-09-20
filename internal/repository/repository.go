@@ -11,6 +11,7 @@ type Repository struct {
 	Articles
 	Subscriptions
 	Users
+	Sources
 }
 
 type Articles interface {
@@ -28,10 +29,15 @@ type Users interface {
 	CreateUser(ctx context.Context, user model.User) (int, error)
 }
 
+type Sources interface {
+	GetAll(ctx context.Context) ([]model.Source, error)
+}
+
 func NewRepository(db *sqlx.DB) *Repository {
 	return &Repository{
 		Articles:      NewArticlesPostgres(db),
 		Subscriptions: NewSubscriptionsPostgres(db),
 		Users:         NewUsersPostgres(db),
+		Sources:       NewSourcesPostgres(db),
 	}
 }

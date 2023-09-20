@@ -1,4 +1,4 @@
-package source
+package feed_processor
 
 import (
 	"context"
@@ -20,6 +20,14 @@ func NewRSSSource(source model.Source) RSSSource {
 		URL:        source.FeedUrl,
 		SourceName: source.Name,
 	}
+}
+
+func (s *RSSSource) GetId() int64 {
+	return s.SourceId
+}
+
+func (s *RSSSource) GetName() string {
+	return s.SourceName
 }
 
 func (s *RSSSource) Fetch(ctx context.Context) ([]model.FeedItem, error) {
