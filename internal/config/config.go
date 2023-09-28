@@ -1,19 +1,25 @@
 package config
 
 import (
+	"time"
+
 	"github.com/kelseyhightower/envconfig"
 	"github.com/spf13/viper"
 )
 
 const (
-	DB_CFG_PREFIX = "newsbotdb"
-	TG_CFG_PREFIX = "newsbottg"
+	DB_CFG_PREFIX     = "newsbotdb"
+	TG_CFG_PREFIX     = "newsbottg"
+	COMMON_CFG_PREFIX = "newsbot"
 )
 
 type Config struct {
-	DB       DatabaseConfig
-	Telegram TelegramBotConfig
-
+	DB                   DatabaseConfig
+	Telegram             TelegramBotConfig
+	FetchInterval        time.Duration `envconfig:"FETCH_INTERVAL"`
+	NotificationInterval time.Duration `envconfig:"NOTIFICATION_INTERVAL"`
+	FilterKeywords       []string      `envconfig:"FILTER_KEYWORDS"`
+	NewsLimit            int           `envconfig:"NEWS_LIMIT"`
 	Messages
 }
 
@@ -52,6 +58,11 @@ func InitConfig() (*Config, error) {
 
 	// Prepare viper
 	if err := setUpViper(); err != nil {
+		return nil, err
+	}
+
+	// Read common config from env
+	if err := envconfig.Process(COMMON_CFG_PREFIX, &cfg); err != nil {
 		return nil, err
 	}
 
